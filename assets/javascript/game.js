@@ -1,16 +1,19 @@
 $(document).ready(function () {
-            var winningNumber = "";
+            // useful global(s) - array to pull images for buttons
             var gemArr = ["assets/images/amber.png", "assets/images/emerald.png", "assets/images/ruby.png", "assets/images/sapphire.png"];
-            var userTotal = 0;
 
-
+            // scoreboard
             var wins = 0;
             var losses = 0;
+            var userTotal = 0;
+            var winningNumber = "";
 
-            $("").text(winningNumber);
-            $("").text(userTotal);
-            $("").text(wins);
-            $("").text(losses);
+
+            // pushes to html
+            $("#winning-number").text(winningNumber);
+            $("#user-total").text(userTotal);
+            $("#wins").text(wins);
+            $("#losses").text(losses);
 
             // randomly select a winningNumber between 19-120
             winningNumber = Math.floor(Math.random() * 120) + 19;
@@ -19,18 +22,43 @@ $(document).ready(function () {
             gemPointValue = Math.floor(Math.random() * 12) + 1;
 
             // variable to create gems (using images in folder: like in frige ex)
-            // jquery attr, apped, addClass
-            function gemButtons() {
+            function makeGemButtons() {
                 for (var i = 0; i < gemArr.length; i++) {
                     var gemImage = $("<img>");
                     gemImage.addClass("gem-button");
-                    gemImage.attr("gem-value", gemPointValue)
+                    gemImage.attr("data-gemValue", gemPointValue)
                     $("#crystals").append(gemImage);
                 }
+                // REMEMBER: it's not called yet.
             }
 
+            $(".gem-button").on("click", function () {
+                var gemValue = ($(this).attr("data-gemvalue"));
+                gemValue = parseInt(gemValue);
+                userTotal += gemValue;
+                // print
+                if (userTotal === winningNumber) {
+                    wins++;
 
+                }
+                // REMEMBER: called when clicked
+            });
+
+            // reset
+            $("#reset").on("click", function () {
+
+                $("#").empty();
+
+            });
         }
+
+
+
+
+
+
+
+
 
         // start game
         // total score set to 0

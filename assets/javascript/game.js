@@ -15,14 +15,21 @@ $(document).ready(function () {
             $("#wins").text(wins);
             $("#losses").text(losses);
 
-            // randomly select a winningNumber between 19-120
-            winningNumber = Math.floor(Math.random() * 120) + 19;
 
-            // randomly generate values for gems(x4) 1-12
-            gemPointValue = Math.floor(Math.random() * 12) + 1;
 
             // variable to create gems (using images in folder: like in frige ex)
-            function makeGemButtons() {
+            function startGame() {
+                // start game with 0 wins/losses/userTotal?
+                wins = 0;
+                losses = 0;
+                userTotal = 0;
+                // randomly select a winningNumber between 19-120
+                winningNumber = Math.floor(Math.random() * 120) + 19;
+
+                // randomly generate values for gems(x4) 1-12
+                gemPointValue = Math.floor(Math.random() * 12) + 1;
+
+
                 for (var i = 0; i < gemArr.length; i++) {
                     var gemImage = $("<img>");
                     gemImage.addClass("gem-button");
@@ -39,18 +46,25 @@ $(document).ready(function () {
                 // print
                 if (userTotal === winningNumber) {
                     wins++;
-
+                }
+                if (userTotal > winningNumber) {
+                    losses++;
                 }
                 // REMEMBER: called when clicked
             });
 
-            // reset
-            $("#reset").on("click", function () {
 
-                $("#").empty();
+            // reset button 
+            // TODO: create button
+            $("#reset").on("click", function () {
+                // resets everything to start
+                startGame();
 
             });
+            // Call startGame function
+            startGame();
         }
+
 
 
 

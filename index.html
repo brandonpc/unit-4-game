@@ -5,41 +5,57 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
         <title>Crystal Collector</title>
     </head>
 
     <body>
         <!-- title -->
         <div class="container">
-            <div>
-                <h1>Crystal Collector Game</h1>
+            <div class="jumbotron">
+                <div>
+                    <h1>Crystal Collector Game</h1>
+                </div>
+                <hr>
+                <div class="instructions">
+                    <p>Click any gem to start!</p>
+                    <!-- TODO: instructions (as a pop-up?? (using bootstrap)) -->
+                </div>
+
+                <!-- wins & losses -->
+                <div class="scoreboard">
+                    <div class="wins">Wins: 0</div>
+                    <div class="losses">Losses: 0</div>
+                </div>
+                <div class="gameplay">
+
+                    <!-- display random number -->
+                    <div>
+                        <h3>Number to Guess:<span id="winning-number"></span></h3>
+                    </div>
+
+                    <!-- display total score -->
+                    <div class="user-total"></div>
+                </div>
+
+                <!-- 4 gems displayed as buttons -->
+                <div id="gem-buttons"></div>
+
+
+                <!-- clear/restart button? -->
+                <div class="restart">
+                    <button type="button" class="btn btn-success">Restart</button>
+
+                </div>
             </div>
-            <div class="instructions">
-                <p>Click any gem to start!</p>
-                <!-- TODO: instructions (as a pop-up?? (using bootstrap)) -->
-            </div>
 
-            <!-- wins & losses -->
-            <div class="scoreboard">
-                <div class="wins">Wins: 0</div>
-                <div class="losses">Losses: 0</div>
-            </div>
-            <div class="gameplay">
-
-                <!-- display random number -->
-                <div class="winning-number"></div>
-
-                <!-- display total score -->
-                <div class="user-total"></div>
-            </div>
-
-            <!-- 4 gems displayed as buttons -->
-            <div class="gem-buttons"></div>
-
-
-            <!-- clear/restart button? -->
-            <div class="restart"></div>
         </div>
+        <script src="assets/javascript/game.js"></script>
 
     </body>
 

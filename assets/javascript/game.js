@@ -7,6 +7,7 @@ $(document).ready(function () {
     var losses = 0;
     var userTotal = 0;
     var winningNumber = "";
+    var gemPointValue = "";
 
 
     // pushes to html
@@ -22,11 +23,33 @@ $(document).ready(function () {
     console.log(winningNumber);
 
     // randomly generate values for gems(x4) 1-12
-    var gemPointValue = Math.floor(Math.random() * 12) + 1;
+    gemPointValue = Math.floor(Math.random() * 12) + 1;
     console.log(gemPointValue);
 
     function randomGemValue() {
         return Math.floor(Math.random() * 12) + 1;
+    }
+
+    function randomWinningNumber() {
+        return Math.floor(Math.random() * 120) + 19;
+
+    }
+
+    function newGemValues() {
+        for (var i = 0; i < gemArr.length; i++) {
+            randomGemValue();
+        }
+
+    }
+
+    // TO FIX: newRound only resets userTotal
+    function newRound() {
+        userTotal = 0;
+        randomWinningNumber();
+        $(".winning-number").text(winningNumber);
+        newGemValues();
+        $(".gem-button").data(randomGemValue);
+        printStuff();
     }
 
     // variable to create gems (using images in folder: like in frige ex)
@@ -54,33 +77,37 @@ $(document).ready(function () {
         printStuff();
     };
 
+
     $(".gem-button").on("click", function () {
 
         var gemValue = ($(this).attr("data-gemvalue"));
         gemValue = parseInt(gemValue);
-        console.log("the gem point value");
-        console.log(gemValue);
-
         userTotal += gemValue;
-        // print?
+
         if (userTotal === winningNumber) {
             wins++;
+            // alert("Great Job!")
+            newRound();
+            // TO FIX: needs something to reset game for another round
         } else if (userTotal >= winningNumber) {
             losses++;
+            // alert("Sad Day")
+            newRound();
+            // TO FIX: needs something to reset game here too.
+
         }
-        // REMEMBER: called when clicked
-        console.log(gemValue);
+
         printStuff();
     });
 
 
-    // reset button 
-    // TODO: create button
-    $(".reset").on("click", function () {
-        // resets everything to start
-        startGame();
+    // reset button (broken?)
+    // $(".reset").on("click", function () {
+    //     // resets everything to start
 
-    });
+    //     startGame();
+
+    // });
 
     // Call startGame function
     startGame();

@@ -30,26 +30,13 @@ $(document).ready(function () {
         return Math.floor(Math.random() * 12) + 1;
     }
 
-    function randomWinningNumber() {
-        return Math.floor(Math.random() * 120) + 19;
 
-    }
-
-    function newGemValues() {
-        for (var i = 0; i < gemArr.length; i++) {
-            randomGemValue();
-        }
-
-    }
-
-    // TO FIX: newRound only resets userTotal
+    // TO FIX: newRound won't reset gem values
     function newRound() {
         userTotal = 0;
-        randomWinningNumber();
-        $(".winning-number").text(winningNumber);
-        newGemValues();
-        $(".gem-button").data(randomGemValue);
-        printStuff();
+        winningNumber = Math.floor(Math.random() * 120) + 19;
+        // set new values for gem buttons
+        // Previous attempts only target the array or all buttons at once.
     }
 
     // variable to create gems (using images in folder: like in frige ex)

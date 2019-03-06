@@ -10,49 +10,67 @@ $(document).ready(function () {
 
 
     // pushes to html
-    $(".winning-number").text(winningNumber);
-    // $(".user-total").text(userTotal);
-    // $(".wins").text(wins);
-    // $(".losses").text(losses);
+    function printStuff() {
+        $(".winning-number").text(winningNumber);
+        $(".user-total").text(userTotal);
+        $(".wins").text(wins);
+        $(".losses").text(losses);
+    }
 
     // randomly select a winningNumber between 19-120
     winningNumber = Math.floor(Math.random() * 120) + 19;
+    console.log(winningNumber);
 
     // randomly generate values for gems(x4) 1-12
-    gemPointValue = Math.floor(Math.random() * 12) + 1;
+    var gemPointValue = Math.floor(Math.random() * 12) + 1;
+    console.log(gemPointValue);
+
+    function randomGemValue() {
+        return Math.floor(Math.random() * 12) + 1;
+    }
 
     // variable to create gems (using images in folder: like in frige ex)
+    function initializeGemImage() {
+        for (var i = 0; i < gemArr.length; i++) {
+            var gemImage = $("<img>");
+            gemImage.addClass("gem-button");
+            gemImage.attr("data-gemvalue", randomGemValue());
+            gemImage.attr("src", gemArr[i]);
+            gemImage.attr("width", "200px");
+            $("#gem-buttons-make").append(gemImage);
+        }
+        // REMEMBER: it's not called yet.
+
+    }
+
+    initializeGemImage();
+
     function startGame() {
-        // start game with 0 wins/losses/userTotal?
+        // start game with 0 wins/losses/userTotal
         wins = 0;
         losses = 0;
         userTotal = 0;
 
-
-
-        for (var i = 0; i < gemArr.length; i++) {
-            var gemImage = $("<img>");
-            gemImage.addClass("gem-button");
-            gemImage.attr("data-gemValue", gemPointValue);
-            gemImage.attr("src", gemArr[i]);
-            gemImage.attr("width", "200px");
-            $("#gem-buttons").append(gemImage);
-        }
-        // REMEMBER: it's not called yet.
+        printStuff();
     };
 
     $(".gem-button").on("click", function () {
-        var gemValue = ($(this).attr("data-gemValue"));
+
+        var gemValue = ($(this).attr("data-gemvalue"));
         gemValue = parseInt(gemValue);
+        console.log("the gem point value");
+        console.log(gemValue);
+
         userTotal += gemValue;
-        // print
+        // print?
         if (userTotal === winningNumber) {
             wins++;
-        }
-        if (userTotal > winningNumber) {
+        } else if (userTotal >= winningNumber) {
             losses++;
         }
         // REMEMBER: called when clicked
+        console.log(gemValue);
+        printStuff();
     });
 
 
@@ -63,8 +81,10 @@ $(document).ready(function () {
         startGame();
 
     });
+
     // Call startGame function
     startGame();
+
 });
 
 
